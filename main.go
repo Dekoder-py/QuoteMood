@@ -1,6 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
 
 func main() {
 	options := [2]string{"happy", "sad"}
@@ -15,8 +20,9 @@ func main() {
 	fmt.Print(">> ")
 
 	// get mood from user input
-	var mood string
-	fmt.Scan(&mood)
+	reader := bufio.NewReader(os.Stdin)
+	mood, _ := reader.ReadString('\n')
+	mood = strings.TrimSpace(strings.ToLower(mood))
 
 	// process mood - must be one of the options else ask again.
 	switch mood {
