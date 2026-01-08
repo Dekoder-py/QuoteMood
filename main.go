@@ -12,9 +12,7 @@ func main() {
 
 	fmt.Println("Welcome to QuoteMood!")
 
-	var running bool = true
-
-	for running {
+	for true { // run forever - processMood exits the program
 		fmt.Println("Mood Options:")
 		for _, opt := range options {
 			fmt.Println("- " + opt)
@@ -28,15 +26,16 @@ func main() {
 		mood = strings.TrimSpace(strings.ToLower(mood))
 
 		// process mood - must be one of the options else ask again.
-		switch mood {
-		case "happy":
-			fmt.Println("Happy quote")
-			running = false
-		case "sad":
-			fmt.Println("Sad quote")
-			running = false
-		default:
-			fmt.Println("Sorry, we didn't recognise that answer. Please choose one of the options.")
+		for _, opt := range options {
+			if mood == opt {
+				processMood(mood)
+			}
 		}
+		fmt.Println("Sorry, we didn't recognise that answer. Please choose one of the options.")
 	}
+}
+
+func processMood(mood string) {
+	fmt.Println(mood + " quote")
+	os.Exit(0)
 }
